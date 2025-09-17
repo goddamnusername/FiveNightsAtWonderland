@@ -1,15 +1,17 @@
 import random
 import time
+
 from config import ROOM_GRAPH
 
+
 class EnemyAI:
-    def __init__(self):
+    def __init__(self) -> None:
         self.position = "main-stage"
         self.at_door = False
         self.ai_level = 1
         self.last_move_time = time.time()
 
-    def move_enemy(self, hour):
+    def move_enemy(self, hour: int) -> None:
         now = time.time()
         if now - self.last_move_time < 4:
             return
@@ -20,7 +22,7 @@ class EnemyAI:
 
         if random.random() > move_chance:
             return
-        
+
         current = self.position
         options = ROOM_GRAPH.get(current, [])
         if not options:
@@ -39,6 +41,6 @@ class EnemyAI:
         if self.position == "office":
             self.at_door = True
 
-    def reset(self):
+    def reset(self) -> None:
         self.position = "main-stage"
         self.at_door = False
